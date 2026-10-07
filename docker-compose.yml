@@ -43,7 +43,7 @@ services:
       # Giữ lại cache mô hình BAAI/bge-m3 để không phải tải lại 2.2GB mỗi lần khởi động
       - hf_cache:/root/.cache/huggingface
       # (Tùy chọn) Mount thư mục data nếu muốn chạy tác vụ import/ingest trực tiếp từ container
-      - ./data:/app/data:ro
+      - ./data:/app/data
     depends_on:
       neo4j:
         condition: service_healthy

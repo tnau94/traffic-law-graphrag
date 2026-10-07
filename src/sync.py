@@ -29,6 +29,11 @@ from urllib.parse import urlparse
 from dotenv import load_dotenv
 from tabulate import tabulate
 
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+if hasattr(sys.stderr, "reconfigure"):
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+
 load_dotenv()
 
 logging.basicConfig(
@@ -36,6 +41,60 @@ logging.basicConfig(
     format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
 )
 logger = logging.getLogger("src.sync")
+
+
+def run_stage_preflight(dry_run: bool = False) -> tuple[bool, float, str]:
+    """Runs Stage 0: Document Manifest scanner & review gate check."""
+    start = time.time()
+    logger.info(">>> [STAGE 0/4] Scanning data/raw and checking document manifest...")
+    try:
+        from src.manifest.scanner import (
+            check_manifest_reviews,
+            scan_and_update_manifest,
+        )
+
+        manifest, added = scan_and_update_manifest()
+        if added:
+            logger.info("Phát hiện %d file .docx mới được thêm vào manifest.", len(added))
+            for doc in added:
+                print(
+                    f"  [+] Đã thêm draft: {doc.number} ({doc.raw_file}) | role={doc.role} | need_review={doc.need_review}"
+                )
+
+        pending = check_manifest_reviews(manifest)
+        elapsed = round(time.time() - start, 2)
+        if pending:
+            print("\n" + "!" * 64)
+            print("⚠️  CẢNH BÁO: CÓ VĂN BẢN ĐANG CHỜ DEV XÁC NHẬN (STRICT GATE)")
+            print("!" * 64)
+            review_rows = []
+            for d in pending:
+                action_needed = (
+                    "Xác định selected_articles & omnibus targets"
+                    if d.role == "OMNIBUS"
+                    else "Xác định amendment_target_fallback"
+                    if d.role == "AMENDMENT"
+                    else "Kiểm tra role & đổi need_review: false"
+                )
+                review_rows.append([d.number, d.raw_file, d.type, d.role, action_needed])
+
+            print(
+                tabulate(
+                    review_rows,
+                    headers=["Số hiệu", "File .docx", "Loại", "Role", "Hành động cần làm"],
+                    tablefmt="grid",
+                )
+            )
+            print(
+                "\n👉 Vui lòng mở 'config/documents.yaml', hoàn thiện cấu hình và đổi 'need_review: false' trước khi chạy sync.\n"
+            )
+            return False, elapsed, f"FAILED ({len(pending)} docs need review)"
+
+        return True, elapsed, "SUCCESS"
+    except Exception as exc:
+        elapsed = round(time.time() - start, 2)
+        logger.error("Pre-flight scan encountered an error: %s", exc)
+        return False, elapsed, f"FAILED: {exc}"
 
 
 def check_port_open(host: str, port: int, timeout: float = 2.0) -> bool:
@@ -185,6 +244,7 @@ def sync(
     doc_id: str | None = None,
     dry_run: bool = False,
     skip_docker: bool = False,
+    skip_preflight: bool = False,
     skip_parser: bool = False,
     skip_rag: bool = False,
 ) -> int:
@@ -197,12 +257,24 @@ def sync(
         f"Mode:         {'DRY-RUN (Validation only)' if dry_run else 'LIVE INGESTION'}"
     )
     print(f"Docker check: {'SKIPPED' if skip_docker else 'ACTIVE'}")
+    print(f"Pre-flight:   {'SKIPPED' if skip_preflight else 'ACTIVE'}")
     print("-" * 64 + "\n")
 
     stages_report: list[list[str | float]] = []
     total_start = time.time()
 
-    # Pre-flight check: Neo4j connection (unless dry-run)
+    # Stage 0: Pre-flight Manifest Gate
+    if not skip_preflight:
+        pf_ok, pf_time, pf_status = run_stage_preflight(dry_run=dry_run)
+        stages_report.append(["0. Manifest Pre-flight Gate", f"{pf_time}s", pf_status])
+        if not pf_ok:
+            print("\n[ERROR] Stage 0 (Manifest Pre-flight Gate) failed. Aborting sync pipeline.")
+            _print_summary(stages_report, round(time.time() - total_start, 2))
+            return 1
+    else:
+        stages_report.append(["0. Manifest Pre-flight Gate", "0.0s", "SKIPPED"])
+
+    # Neo4j connectivity check (unless dry-run)
     if not dry_run:
         is_ready = ensure_neo4j_running(skip_docker=skip_docker)
         if not is_ready:
@@ -291,6 +363,11 @@ def main() -> None:
         help="Skip Docker startup check (assumes Neo4j is already running)",
     )
     parser.add_argument(
+        "--skip-preflight",
+        action="store_true",
+        help="Skip Stage 0 manifest scanner and review gate check",
+    )
+    parser.add_argument(
         "--skip-parser",
         action="store_true",
         help="Skip Stage 1 parser execution",
@@ -308,6 +385,7 @@ def main() -> None:
         doc_id=doc_id,
         dry_run=args.dry_run,
         skip_docker=args.skip_docker,
+        skip_preflight=args.skip_preflight,
         skip_parser=args.skip_parser,
         skip_rag=args.skip_rag,
     )

@@ -1,0 +1,329 @@
+# ==============================================================================
+#  Traffic Law GraphRAG - Document Manifest
+#  File này được tự động cập nhật bởi scanner khi có file .docx mới trong data/raw.
+#  Dev kiểm tra các văn bản có 'need_review: true' trước khi chạy pipeline nạp dữ liệu.
+# ==============================================================================
+
+documents:
+- id: 35_2024_QH15
+  number: 35/2024/QH15
+  raw_file: 35_2024_QH15_588811.docx
+  name: Luật Đường bộ
+  type: LUAT
+  role: NORMAL
+  need_review: false
+  aliases:
+  - Luật Đường bộ
+  - Luật số 35/2024/QH15
+  - 35/2024/QH15
+  scope:
+    mode: ALL
+    selected_articles: []
+  amendment_article_targets: {}
+- id: 36_2024_QH15
+  number: 36/2024/QH15
+  raw_file: 36_2024_QH15_m_444251.docx
+  name: Luật Trật tự, an toàn giao thông đường bộ
+  type: LUAT
+  role: NORMAL
+  need_review: false
+  aliases:
+  - Luật Trật tự, an toàn giao thông đường bộ
+  - Luật số 36/2024/QH15
+  - 36/2024/QH15
+  scope:
+    mode: ALL
+    selected_articles: []
+  amendment_article_targets: {}
+- id: 118_2025_QH15
+  number: 118/2025/QH15
+  raw_file: 118_2025_QH15_682798.docx
+  name: Luật sửa đổi, bổ sung một số luật về an ninh, trật tự
+  type: LUAT
+  role: OMNIBUS
+  need_review: false
+  aliases:
+  - Luật sửa đổi, bổ sung một số luật về an ninh, trật tự
+  - Luật số 118/2025/QH15
+  - 118/2025/QH15
+  scope:
+    mode: SELECTED
+    selected_articles:
+    - '7'
+    - '8'
+  omnibus:
+    targets:
+    - document: 35/2024/QH15
+      keywords:
+      - Luật Đường bộ
+      - Luật số 35/2024/QH15
+      - 35/2024/QH15
+    - document: 36/2024/QH15
+      keywords:
+      - Luật Trật tự, an toàn giao thông đường bộ
+      - Luật số 36/2024/QH15
+      - 36/2024/QH15
+  amendment_article_targets:
+    '7': 36/2024/QH15
+    '8': 35/2024/QH15
+- id: 151_2024_ND_CP
+  number: 151/2024/NĐ-CP
+  raw_file: 151_2024_ND-CP_619564.docx
+  name: Nghị định quy định chi tiết Luật Trật tự, an toàn giao thông đường bộ
+  type: NGHI_DINH
+  role: NORMAL
+  need_review: false
+  aliases:
+  - Nghị định 151/2024/NĐ-CP
+  - Nghị định số 151/2024/NĐ-CP
+  - 151/2024/NĐ-CP
+  - 151/2024/ND-CP
+  scope:
+    mode: ALL
+    selected_articles: []
+  amendment_article_targets: {}
+- id: 168_2024_ND_CP
+  number: 168/2024/NĐ-CP
+  raw_file: 168_2024_ND-CP_619502.docx
+  name: Nghị định xử phạt vi phạm hành chính về trật tự, an toàn giao thông đường
+    bộ
+  type: NGHI_DINH
+  role: NORMAL
+  need_review: false
+  aliases:
+  - Nghị định 168/2024/NĐ-CP
+  - Nghị định số 168/2024/NĐ-CP
+  - 168/2024/NĐ-CP
+  - 168/2024/ND-CP
+  scope:
+    mode: ALL
+    selected_articles: []
+  amendment_article_targets: {}
+- id: 184_2025_ND_CP
+  number: 184/2025/NĐ-CP
+  raw_file: 184_2025_ND-CP_664032.docx
+  name: Nghị định phân định thẩm quyền chính quyền 2 cấp (lĩnh vực ANTT)
+  type: NGHI_DINH
+  role: OMNIBUS
+  need_review: false
+  aliases:
+  - Nghị định 184/2025/NĐ-CP
+  - Nghị định số 184/2025/NĐ-CP
+  - 184/2025/NĐ-CP
+  - 184/2025/ND-CP
+  scope:
+    mode: SELECTED
+    selected_articles:
+    - '27'
+  omnibus:
+    targets:
+    - document: 151/2024/ND-CP
+      keywords:
+      - Nghị định 151/2024/NĐ-CP
+      - Nghị định số 151/2024/NĐ-CP
+      - 151/2024/NĐ-CP
+  amendment_target_fallback: 151/2024/ND-CP
+  amendment_article_targets:
+    '27': 151/2024/ND-CP
+- id: 236_2026_ND_CP
+  number: 236/2026/NĐ-CP
+  raw_file: 236_2026_ND-CP_712588.docx
+  name: Nghị định sửa đổi, bổ sung Nghị định 151/2024/NĐ-CP
+  type: NGHI_DINH
+  role: AMENDMENT
+  need_review: false
+  aliases:
+  - Nghị định 236/2026/NĐ-CP
+  - Nghị định số 236/2026/NĐ-CP
+  - 236/2026/NĐ-CP
+  - 236/2026/ND-CP
+  scope:
+    mode: ALL
+    selected_articles: []
+  amendment_target_fallback: 151/2024/ND-CP
+  amendment_article_targets: {}
+- id: 238_2026_ND_CP
+  number: 238/2026/NĐ-CP
+  raw_file: 238_2026_ND-CP_712521.docx
+  name: Nghị định sửa đổi, bổ sung Nghị định 168/2024/NĐ-CP
+  type: NGHI_DINH
+  role: AMENDMENT
+  need_review: false
+  aliases:
+  - Nghị định 238/2026/NĐ-CP
+  - Nghị định số 238/2026/NĐ-CP
+  - 238/2026/NĐ-CP
+  - 238/2026/ND-CP
+  scope:
+    mode: ALL
+    selected_articles: []
+  amendment_target_fallback: 168/2024/ND-CP
+  amendment_article_targets: {}
+- id: 165_2024_ND_CP
+  number: 165/2024/NĐ-CP
+  raw_file: 165_2024_ND-CP_623287.docx
+  name: Nghị định QUY ĐỊNH CHI TIẾT, HƯỚNG DẪN THI HÀNH MỘT SỐ ĐIỀU CỦA LUẬT ĐƯỜNG
+    BỘ VÀ ĐIỀU 77 LUẬT TRẬT TỰ, AN TOÀN GIAO THÔNG ĐƯỜNG BỘ
+  type: NGHI_DINH
+  role: NORMAL
+  need_review: false
+  aliases:
+  - Nghị định 165/2024/NĐ-CP
+  - Nghị định số 165/2024/NĐ-CP
+  - 165/2024/NĐ-CP
+  - 165/2024/ND-CP
+  scope:
+    mode: ALL
+    selected_articles: []
+  amendment_article_targets: {}
+- id: 160_2024_ND_CP
+  number: 160/2024/NĐ-CP
+  raw_file: 160_2024_ND-CP_624017.docx
+  name: Nghị định QUY ĐỊNH VỀ HOẠT ĐỘNG ĐÀO TẠO VÀ SÁT HẠCH LÁI XE
+  type: NGHI_DINH
+  role: NORMAL
+  need_review: false
+  aliases:
+  - Nghị định 160/2024/NĐ-CP
+  - Nghị định số 160/2024/NĐ-CP
+  - 160/2024/NĐ-CP
+  - 160/2024/ND-CP
+  scope:
+    mode: ALL
+    selected_articles: []
+  amendment_article_targets: {}
+- id: 156_2024_ND_CP
+  number: 156/2024/NĐ-CP
+  raw_file: 156_2024_ND-CP_635371.docx
+  name: Nghị định QUY ĐỊNH VỀ ĐẤU GIÁ BIỂN SỐ XE
+  type: NGHI_DINH
+  role: NORMAL
+  need_review: false
+  aliases:
+  - Nghị định 156/2024/NĐ-CP
+  - Nghị định số 156/2024/NĐ-CP
+  - 156/2024/NĐ-CP
+  - 156/2024/ND-CP
+  scope:
+    mode: ALL
+    selected_articles: []
+  amendment_article_targets: {}
+- id: 72_2024_TT-BCA
+  number: 72/2024/TT-BCA
+  raw_file: 72_2024_TT-BCA_633011.docx
+  name: THÔNG TƯ QUY ĐỊNH QUY TRÌNH ĐIỀU TRA, GIẢI QUYẾT TAI NẠN GIAO THÔNG ĐƯỜNG
+    BỘ CỦA CẢNH SÁT GIAO THÔNG
+  type: THONG_TU
+  role: NORMAL
+  need_review: false
+  aliases:
+  - Thông tư 72/2024/TT-BCA
+  - 72/2024/TT-BCA
+  scope:
+    mode: ALL
+    selected_articles: []
+  amendment_article_targets: {}
+- id: 12_2025_TT-BCA
+  number: 12/2025/TT-BCA
+  raw_file: 12_2025_TT-BCA_645271.docx
+  name: QUY ĐỊNH VỀ SÁT HẠCH, CẤP GIẤY PHÉP LÁI XE; CẤP, SỬ DỤNG GIẤY PHÉP LÁI XE
+    QUỐC TẾ
+  type: THONG_TU
+  role: NORMAL
+  need_review: false
+  aliases:
+  - QUY ĐỊNH VỀ SÁT HẠCH, CẤP GIẤY PHÉP LÁI XE; CẤP, SỬ DỤNG GIẤY PHÉP LÁI XE QUỐC
+    TẾ
+  - Thông tư 12/2025/TT-BCA
+  - 12/2025/TT-BCA
+  scope:
+    mode: ALL
+    selected_articles: []
+  amendment_article_targets: {}
+- id: 13_2025_TT-BCA
+  number: 13/2025/TT-BCA
+  raw_file: 13_2025_TT-BCA_645302.docx
+  name: SỬA ĐỔI, BỔ SUNG MỘT SỐ ĐIỀU CỦA CÁC THÔNG TƯ QUY ĐỊNH VỀ TRẬT TỰ, AN TOÀN
+    GIAO THÔNG ĐƯỜNG BỘ, ĐƯỜNG SẮT VÀ ĐƯỜNG THỦY NỘI ĐỊA
+  type: THONG_TU
+  role: NORMAL
+  need_review: false
+  aliases:
+  - SỬA ĐỔI, BỔ SUNG MỘT SỐ ĐIỀU CỦA CÁC THÔNG TƯ QUY ĐỊNH VỀ TRẬT TỰ, AN TOÀN GIAO
+    THÔNG ĐƯỜNG BỘ, ĐƯỜNG SẮT VÀ ĐƯỜNG THỦY NỘI ĐỊA
+  - Thông tư 13/2025/TT-BCA
+  - 13/2025/TT-BCA
+  scope:
+    mode: ALL
+    selected_articles: []
+  amendment_article_targets: {}
+- id: 26_2024_TT-BCA
+  number: 26/2024/TT-BCA
+  raw_file: 26_2024_TT-BCA_618721.docx
+  name: QUY ĐỊNH THỐNG KÊ, TỔNG HỢP, XÂY DỰNG, QUẢN LÝ, KHAI THÁC, SỬ DỤNG CƠ SỞ DỮ
+    LIỆU VỀ TAI NẠN GIAO THÔNG ĐƯỜNG BỘ, TAI NẠN GIAO THÔNG ĐƯỜNG SẮT, TAI NẠN GIAO
+    THÔNG ĐƯỜNG THỦY NỘI ĐỊA
+  type: THONG_TU
+  role: NORMAL
+  need_review: false
+  aliases:
+  - QUY ĐỊNH THỐNG KÊ, TỔNG HỢP, XÂY DỰNG, QUẢN LÝ, KHAI THÁC, SỬ DỤNG CƠ SỞ DỮ LIỆU
+    VỀ TAI NẠN GIAO THÔNG ĐƯỜNG BỘ, TAI NẠN GIAO THÔNG ĐƯỜNG SẮT, TAI NẠN GIAO THÔNG
+    ĐƯỜNG THỦY NỘI ĐỊA
+  - Thông tư 26/2024/TT-BCA
+  - 26/2024/TT-BCA
+  scope:
+    mode: ALL
+    selected_articles: []
+  amendment_article_targets: {}
+- id: 63_2024_TT-BCA
+  number: 63/2024/TT-BCA
+  raw_file: 63_2024_TT-BCA_633515.docx
+  name: QUY ĐỊNH CÔNG TÁC KIỂM TRA, KIỂM SOÁT VÀ XỬ LÝ VI PHẠM PHÁP LUẬT TRONG LĨNH
+    VỰC GIAO THÔNG ĐƯỜNG SẮT CỦA CẢNH SÁT GIAO THÔNG
+  type: THONG_TU
+  role: NORMAL
+  need_review: false
+  aliases:
+  - QUY ĐỊNH CÔNG TÁC KIỂM TRA, KIỂM SOÁT VÀ XỬ LÝ VI PHẠM PHÁP LUẬT TRONG LĨNH VỰC
+    GIAO THÔNG ĐƯỜNG SẮT CỦA CẢNH SÁT GIAO THÔNG
+  - Thông tư 63/2024/TT-BCA
+  - 63/2024/TT-BCA
+  scope:
+    mode: ALL
+    selected_articles: []
+  amendment_article_targets: {}
+- id: 
+  number: 65/2024/TT-BCA
+  raw_file: 65_2024_TT-BCA_632409.docx
+  name: QUY ĐỊNH KIỂM TRA KIẾN THỨC PHÁP LUẬT VỀ TRẬT TỰ, AN TOÀN GIAO THÔNG ĐƯỜNG
+    BỘ ĐỂ ĐƯỢC PHỤC HỒI ĐIỂM GIẤY PHÉP LÁI XE
+  type: THONG_TU
+  role: NORMAL
+  need_review: false
+  aliases:
+  - QUY ĐỊNH KIỂM TRA KIẾN THỨC PHÁP LUẬT VỀ TRẬT TỰ, AN TOÀN GIAO THÔNG ĐƯỜNG BỘ
+    ĐỂ ĐƯỢC PHỤC HỒI ĐIỂM GIẤY PHÉP LÁI XE
+  - Thông tư 65/2024/TT-BCA
+  - 65/2024/TT-BCA
+  scope:
+    mode: ALL
+    selected_articles: []
+  amendment_article_targets: {}
+- id: 73_2024_TT-BCA
+  number: 73/2024/TT-BCA
+  raw_file: 73_2024_TT-BCA_633438.docx
+  name: QUY ĐỊNH CÔNG TÁC TUẦN TRA, KIỂM SOÁT, XỬ LÝ VI PHẠM PHÁP LUẬT VỀ TRẬT TỰ,
+    AN TOÀN GIAO THÔNG ĐƯỜNG BỘ CỦA CẢNH SÁT GIAO THÔNG
+  type: THONG_TU
+  role: NORMAL
+  need_review: false
+  aliases:
+  - QUY ĐỊNH CÔNG TÁC TUẦN TRA, KIỂM SOÁT, XỬ LÝ VI PHẠM PHÁP LUẬT VỀ TRẬT TỰ, AN
+    TOÀN GIAO THÔNG ĐƯỜNG BỘ CỦA CẢNH SÁT GIAO THÔNG
+  - Thông tư 73/2024/TT-BCA
+  - 73/2024/TT-BCA
+  scope:
+    mode: ALL
+    selected_articles: []
+  amendment_article_targets: {}
